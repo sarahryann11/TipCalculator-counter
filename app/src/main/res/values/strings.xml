@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Tip Calculator</string>
+    <string name="billHint">Enter bill amount…</string>
+    <string name="numPeopleHint">Number of People…</string>
+    <string name="calculateButton">Calculate</string>
+    <string name="tipPicker">Tip:</string>
+    <string name="tip15">15%</string>
+    <string name="tip20">20%</string>
+    <string name="tipCustom">Custom Tip</string>
+    <string name="tip">Tip Total:</string>
+    <string name="total">Total:</string>
+    <string name="totalPerPerson">Total Per Person:</string>
+    <string name="tipTotal">$0.00</string>
+    <string name="amountTotal">$0.00</string>
+    <string name="totalPerPersonTotal">$0.00</string>
+</resources>
