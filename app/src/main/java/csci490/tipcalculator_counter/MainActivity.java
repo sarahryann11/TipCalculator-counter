@@ -17,8 +17,6 @@ import android.view.View.OnKeyListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     private EditText billAmount;
@@ -148,13 +146,13 @@ public class MainActivity extends AppCompatActivity {
         Double numOfPeople = Double.parseDouble(numPeople.getText().toString());
         Double percentage = null;
 
-        if (billTotal < 1.0)
+        if (billTotal < 1.00)
         {
             showErrorAlert("Amount not valid. Enter valid amount.", billAmount.getId());
             isError = true;
         }
 
-        if (numOfPeople < 1.0)
+        if (numOfPeople < 1.00)
         {
             showErrorAlert("Number of people not valid. Enter valid number.", numPeople.getId());
             isError = true;
@@ -172,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         if (otherTipChecked == R.id.tipCustomButton)
         {
             percentage = Double.parseDouble(tipOther.getText().toString());
-            if (percentage < 1.0)
+            if (percentage < 1.00)
             {
                 showErrorAlert("Percentage not valid. Enter valid tip amount", tipOther.getId());
                 isError = true;
