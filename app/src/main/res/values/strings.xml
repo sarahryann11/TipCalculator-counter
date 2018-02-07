@@ -3,6 +3,7 @@
     <string name="billHint">Enter bill amount…</string>
     <string name="numPeopleHint">Number of People…</string>
     <string name="calculateButton">Calculate</string>
+    <string name="resetButton">Reset</string>
     <string name="tipPicker">Tip:</string>
     <string name="tip15">15%</string>
     <string name="tip20">20%</string>

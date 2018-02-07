@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSize10">10pt</dimen>
+    <dimen name="paddingTop">5dip</dimen>
+    <dimen name="paddingBottom">10dip</dimen>
+    <dimen name="paddingEdits">20dip</dimen>
+    <dimen name="billWidth">197dp</dimen>
+    <dimen name="numPeopleWidth">184dp</dimen>
+    <dimen name="divider">2px</dimen>
+    <dimen name="buttonHeight">40dp</dimen>
+    <dimen name="buttonWidth">142dp</dimen>
+    <dimen name="buttonMargin">10dp</dimen>
+    <dimen name="editTextMargin">20dp</dimen>
+</resources>

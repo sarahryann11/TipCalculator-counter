@@ -10,28 +10,33 @@
 
         <EditText
             android:id="@+id/bill"
-            android:layout_width="202dp"
+            android:layout_width="@dimen/billWidth"
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_span="1"
             android:hint="@string/billHint"
             android:inputType="numberDecimal"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp" />
+            android:paddingBottom="@dimen/paddingEdits"
+            android:paddingTop="@dimen/paddingEdits" />
 
         <EditText
             android:id="@+id/numPeople"
-            android:layout_width="184dp"
+            android:layout_width="@dimen/numPeopleWidth"
             android:layout_height="wrap_content"
-            android:layout_column="2"
+            android:layout_column="1"
+            android:layout_marginRight="@dimen/editTextMargin"
             android:layout_span="1"
             android:hint="@string/numPeopleHint"
             android:inputType="numberDecimal"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp" />
+            android:paddingBottom="@dimen/paddingEdits"
+            android:paddingTop="@dimen/paddingEdits" />
     </TableRow>
 
-    <TableRow>
+    <View
+        android:background="@color/grey"
+        android:layout_height="@dimen/divider" />
+
+    <TableRow android:background="@color/lightBlue">
 
         <RadioGroup
             android:id="@+id/tipsButtons"
@@ -43,21 +48,24 @@
 
             <RadioButton
                 android:id="@+id/tip15Button"
+                android:textColor="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tip15" />
 
             <RadioButton
                 android:id="@+id/tip20Button"
+                android:textColor="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tip20" />
 
             <RadioButton
                 android:id="@+id/tipCustomButton"
-                android:layout_width="wrap_content"
+                android:layout_width="127dp"
                 android:layout_height="wrap_content"
-                android:text="@string/tipCustom" />
+                android:text="@string/tipCustom"
+                android:textColor="@color/grey" />
 
             <EditText
                 android:id="@+id/tipOther"
@@ -65,115 +73,141 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_weight="1"
+                android:layout_marginRight="@dimen/editTextMargin"
+                android:textColor="@color/grey"
                 android:inputType="numberDecimal" />
         </RadioGroup>
     </TableRow>
 
-    <!-- Calculate Button -->
-    <android.support.constraint.ConstraintLayout>
+
+
+    <!-- Calculate and Reset Buttons -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_height="35dp"
+        android:background="@color/lightBlue">
 
         <Button
             android:id="@+id/button"
-            android:layout_width="186dp"
-            android:layout_height="44dp"
+            android:layout_width="@dimen/buttonWidth"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_column="0"
+            android:layout_margin="@dimen/buttonMargin"
+            android:layout_span="0"
             android:background="@drawable/button_style"
             android:text="@string/calculateButton"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="@dimen/buttonWidth"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_column="1"
+            android:layout_margin="@dimen/buttonMargin"
+            android:layout_marginStart="172dp"
+            android:background="@drawable/button_style"
+            android:text="@string/resetButton"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
+
 
     <!-- Tip Total -->
     <TableRow
-        android:paddingBottom="10dip"
-        android:paddingTop="5dip">
+        android:background="@color/lightBlue"
+        android:paddingBottom="@dimen/paddingBottom"
+        android:paddingTop="@dimen/paddingTop">
+
         <TextView
             android:id="@+id/tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:shadowColor="#FFFFFF"
-            android:shadowRadius="2"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:textSize="10pt"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/textSize10"
             android:text="@string/tipPicker" />
 
         <TextView
             android:id="@+id/tipTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
+            android:layout_column="1"
             android:layout_span="2"
-            android:shadowColor="#FFFFFF"
-            android:shadowRadius="2"
-            android:shadowDx="1"
-            android:shadowDy="1"
+            android:textColor="@color/grey"
             android:text="@string/tipTotal"
-            android:textSize="10pt" />
+            android:textSize="@dimen/textSize10" />
     </TableRow>
+
+    <View
+        android:background="@color/grey"
+        android:layout_height="@dimen/divider" />
 
     <!-- Bill Total -->
     <TableRow
-        android:paddingBottom="10dip"
-        android:paddingTop="5dip">
+        android:background="@color/lightBlue"
+        android:paddingBottom="@dimen/paddingBottom"
+        android:paddingTop="@dimen/paddingTop">
+
         <TextView
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:shadowColor="#FFFFFF"
-            android:shadowRadius="2"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:textSize="10pt"
-            android:text="@string/total"/>
+            android:textColor="@color/grey"
+            android:textSize="@dimen/textSize10"
+            android:text="@string/total" />
 
         <TextView
             android:id="@+id/amountTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
+            android:layout_column="1"
             android:layout_span="2"
-            android:shadowColor="#FFFFFF"
-            android:shadowRadius="2"
-            android:shadowDx="1"
-            android:shadowDy="1"
+            android:textColor="@color/grey"
             android:text="@string/amountTotal"
-            android:textSize="10pt" />
+            android:textSize="@dimen/textSize10" />
     </TableRow>
+
+    <View
+        android:background="@color/grey"
+        android:layout_height="@dimen/divider" />
 
     <!-- Amount Per Person Total -->
     <TableRow
-        android:paddingBottom="10dip"
-        android:paddingTop="5dip">
+        android:background="@color/lightBlue"
+        android:paddingBottom="@dimen/paddingBottom"
+        android:paddingTop="@dimen/paddingTop">
 
         <TextView
             android:id="@+id/totalPerPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
-            android:shadowColor="#FFFFFF"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
+            android:textColor="@color/grey"
             android:text="@string/totalPerPerson"
-            android:textSize="10pt" />
+            android:textSize="@dimen/textSize10" />
 
         <TextView
             android:id="@+id/totalPerPersonTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
+            android:layout_column="1"
             android:layout_span="3"
-            android:shadowColor="#FFFFFF"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
+            android:textColor="@color/grey"
             android:text="@string/totalPerPersonTotal"
-            android:textSize="10pt" />
+            android:textSize="@dimen/textSize10" />
     </TableRow>
+
+    <View
+        android:background="@color/grey"
+        android:layout_height="@dimen/divider" />
 
 </TableLayout>

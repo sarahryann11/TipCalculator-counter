@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton tip20Button;
     private RadioButton tipCustomButton;
     private Button calculateButton;
+    private Button resetButton;
 
     private TextView totalTipAmount;
     private TextView totalBillAmount;
     private TextView totalTipPerPerson;
 
-    DecimalFormat precision = new DecimalFormat("#.00");
     private int otherTipChecked = -1;
 
     @Override
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         calculateButton = (Button) findViewById(R.id.button);
         calculateButton.setEnabled(false);
+
+        resetButton = (Button) findViewById(R.id.button2);
 
         tipsButtons = (RadioGroup) findViewById(R.id.tipsButtons);
         tip15Button = (RadioButton) findViewById(R.id.tip15Button);
@@ -91,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
         billAmount.setOnKeyListener(mKeyListener);
         numPeople.setOnKeyListener(mKeyListener);
         tipOther.setOnKeyListener(mKeyListener);
+
         calculateButton.setOnClickListener(mClickListener);
+        resetButton.setOnClickListener(mClickListener);
     }
 
     private OnKeyListener mKeyListener = new OnKeyListener() {
@@ -123,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
             {
                 calculate();
                 Toast toast = Toast.makeText(getApplicationContext(), "Bill Calculated!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 200);
+                toast.show();
+            }
+            else
+            {
+                reset();
+                Toast toast = Toast.makeText(getApplicationContext(), "Calculator Reset!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 200);
                 toast.show();
             }
@@ -181,12 +192,21 @@ public class MainActivity extends AppCompatActivity {
             totalBillAmount.setText("$" + billStr);
             totalTipAmount.setText("$" + tipStr);
             totalTipPerPerson.setText("$" + individualStr);
-
-            //totalBillAmount.setText("$" + bill.toString());
-            //totalTipAmount.setText("$" + tip.toString());
-            //totalTipPerPerson.setText("$" + individualBill.toString());
         }
 
+    }
+
+    private void reset()
+    {
+        totalBillAmount.setText("");
+        totalTipAmount.setText("");
+        totalTipPerPerson.setText("");
+        billAmount.setText("");
+        numPeople.setText("");
+        tipOther.setText("");
+
+        tipsButtons.clearCheck();
+        billAmount.requestFocus();
     }
 
     /**
