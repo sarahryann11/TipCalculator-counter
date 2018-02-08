@@ -1,3 +1,5 @@
+//Sarah Nicholson
+
 package csci490.tipcalculator_counter;
 
 import android.content.DialogInterface;
@@ -16,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int otherTipChecked = -1;
 
+    //to format totals
+    private NumberFormat decFormat = NumberFormat.getCurrencyInstance();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         numPeople = (EditText) findViewById(R.id.numPeople);
         tipOther = (EditText) findViewById(R.id.tipOther);
 
+        //put cursor in EditText to edit bill amount
         billAmount.requestFocus();
 
         calculateButton = (Button) findViewById(R.id.button);
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup g, int checked) {
 
+                // don't enable custom tip amount if one of these buttons are checked
                 if (checked == R.id.tip15Button || checked == R.id.tip20Button)
                 {
                     tipOther.setEnabled(false);
@@ -74,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     calculateButton.setEnabled(billAmount.getText().length() > 0
                             && numPeople.getText().length() > 0);
                 }
+
+                // enable custom tip amount
                 if (checked == R.id.tipCustomButton)
                 {
                     tipOther.setEnabled(true);
@@ -103,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.bill:
                 case R.id.numPeople:
-                    calculateButton.setEnabled(billAmount.getText().length() > 0 && numPeople.getText().length() > 0);
+                    calculateButton.setEnabled(billAmount.getText().length() > 0
+                            && numPeople.getText().length() > 0);
                     break;
                 case R.id.tipOther:
                     calculateButton.setEnabled(billAmount.getText().length() > 0
@@ -124,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             if (view.getId() == R.id.button)
             {
                 calculate();
+                // show toast message that the bill has been calculated
                 Toast toast = Toast.makeText(getApplicationContext(), "Bill Calculated!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 200);
                 toast.show();
@@ -131,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 reset();
+                // show toast message that the tip calculator has been reset
                 Toast toast = Toast.makeText(getApplicationContext(), "Calculator Reset!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 200);
                 toast.show();
@@ -146,20 +159,19 @@ public class MainActivity extends AppCompatActivity {
         Double numOfPeople = Double.parseDouble(numPeople.getText().toString());
         Double percentage = null;
 
+        // makes bill be at least a dollar
         if (billTotal < 1.00)
         {
             showErrorAlert("Amount not valid. Enter valid amount.", billAmount.getId());
             isError = true;
         }
 
+        // one person at least has to be paying
         if (numOfPeople < 1.00)
         {
             showErrorAlert("Number of people not valid. Enter valid number.", numPeople.getId());
             isError = true;
         }
-
-        if (otherTipChecked == -1)
-            otherTipChecked = tipsButtons.getCheckedRadioButtonId();
 
         if (otherTipChecked == R.id.tip15Button)
             percentage = 15.00;
@@ -167,9 +179,13 @@ public class MainActivity extends AppCompatActivity {
         if (otherTipChecked == R.id.tip20Button)
             percentage = 20.00;
 
+        if (otherTipChecked == -1)
+            otherTipChecked = tipsButtons.getCheckedRadioButtonId();
+
         if (otherTipChecked == R.id.tipCustomButton)
         {
             percentage = Double.parseDouble(tipOther.getText().toString());
+            // custom tip has to be more than 1%
             if (percentage < 1.00)
             {
                 showErrorAlert("Percentage not valid. Enter valid tip amount", tipOther.getId());
@@ -183,27 +199,27 @@ public class MainActivity extends AppCompatActivity {
             Double bill = (billTotal + tip);
             Double individualBill = bill / numOfPeople;
 
-            String billStr = bill.toString();
-            String tipStr = tip.toString();
-            String individualStr = individualBill.toString();
-
-            totalBillAmount.setText("$" + billStr);
-            totalTipAmount.setText("$" + tipStr);
-            totalTipPerPerson.setText("$" + individualStr);
+            // set the TextViews and edit the calculations to look like money values
+            totalBillAmount.setText(decFormat.format(bill));
+            totalTipAmount.setText(decFormat.format(tip));
+            totalTipPerPerson.setText(decFormat.format(individualBill));
         }
 
     }
 
     private void reset()
     {
-        totalBillAmount.setText("");
-        totalTipAmount.setText("");
-        totalTipPerPerson.setText("");
+        // reset everything if reset button is hit
+        totalBillAmount.setText("$0.00");
+        totalTipAmount.setText("$0.00");
+        totalTipPerPerson.setText("$0.00");
         billAmount.setText("");
         numPeople.setText("");
         tipOther.setText("");
 
+
         tipsButtons.clearCheck();
+        // refocus the cursor to edit the bill amount
         billAmount.requestFocus();
     }
 
